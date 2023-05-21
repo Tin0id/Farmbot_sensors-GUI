@@ -2,13 +2,17 @@
 # GUI_main.py
 # main code that will be launched by the user : Frontend code.
 
-# CSV file processing, errors check (re)
-# Google API import (backend)
-# Data processing (pandas, numpy)
-# GUI 
+# 1. Google API csv file download (from backend code, google drive access)
+# 2. CSV file processing, errors check (re)
+# 3. Data processing (pandas, numpy)
+# 4. GUI 
 
-
-
+# Necessary preinstalled module on OS for google API access :
+#pip3 install requests
+#pip3 install google-auth
+#pip3 install google-cloud
+#pip3 install google-auth-oauthlib
+#pip3 install google-api-python-client
 
 
 ##
@@ -31,10 +35,21 @@ if 'pandas' not in sys.modules:
 
 ##
 ##
-## File Download API
+## File Download google API
 ##
 ##
 
+from file_google_API.main_launch_final import rocket_launch # access the function
+
+# Parameters define by the user:
+
+from_date = 20200513000000 # or None
+to_date = 20240501001000 # or None
+
+#keyword = 'raw data' # Warning: Depending of the range of time this will take a lot of time.
+keyword = 'daily data' # Faster
+
+rocket_launch(from_date, to_date, keyword)
 
 
 ##
@@ -64,6 +79,6 @@ data_np = data_df.to_numpy() #Conversion to numpy array for easier manipulation
 
 
 ##
-## Data UI
+## GUI
 ##
 
