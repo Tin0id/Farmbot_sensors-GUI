@@ -1,17 +1,25 @@
+# Farmbot project 2023, Sensors & UI, Mathieu Stawarz
+# GUI_main.py
+# main code that will be launched by the user : Frontend code.
+
+# CSV file processing, errors check (re)
+# Google API import (backend)
+# Data processing (pandas, numpy)
+# GUI 
+
+
+
+
+
 ##
 ##
-## Modules imports & error check
+## Modules imports
 ##
 ##
 
-import imp
 import sys
 if "sys" not in dir():
     sys.exit("Error: sys not imported")
-
-import re
-if "re" not in sys.modules:
-    sys.exit("Error: re not imported")
 
 import numpy as np
 if 'numpy' not in sys.modules:
@@ -21,19 +29,11 @@ import pandas as pd
 if 'pandas' not in sys.modules:
     sys.exit("Error: pandas package not imported")
 
-import matplotlib.pyplot as plt
-if 'matplotlib.pyplot' not in sys.modules:
-    sys.exit("Error: pyplot package not imported")
-plt.close("all") #Closes all matplotlib plots
-
 ##
 ##
 ## File Download API
 ##
 ##
-
-
-
 
 
 
@@ -43,32 +43,10 @@ plt.close("all") #Closes all matplotlib plots
 ##
 ##
 
-path_data= "Data/falsedata.csv"
+path_data= "Data/falsedata.csv" #CSV file extraction
 
-#Error check file empty or not 
-file = open(path_data, "r")
-file_content = file.read()
-file.close()
-if file_content == "":
-    sys.exit("\n File '{}' is empty".format(path_data))
-else:
-    if "\n" not in file_content:
-        sys.exit("\n File '{}' contains headers only.\n".format(path_data))
-
-#Error check file has headers or not 
-split_file_values = re.split('\n|,', file_content) #regex split, use | as or for mutliole delimiters
-split_file_lines = file_content.split('\n')
-header_line = split_file_lines[0].split(',')
-hl_dec = re.split(r'\.|,', split_file_lines[0]) # hl_d = headline_decimals & r'\.' dot split added too for isdigit
-if any(hl_dec[i].isdigit() for i in range(len(hl_dec)) ): # Check if there are only digits in 1st line cells
-    sys.exit("\n File '{}' headers are incomplete or non-existent \n".format(path_data))
-
-#Extract Nb of headers & headers line
-headers_line = split_file_lines[0].split(',')
-nb_headers= len(split_file_lines[0].split(','))
-
-#Delete unused variables
-del(file,file_content, split_file_values, split_file_lines, hl_dec )
+from file_check import filecheckf # Imports function
+headers, nb_headers = filecheckf(path_data) # Extract Nb of headers & headers line
 
 
 ##
@@ -78,26 +56,14 @@ del(file,file_content, split_file_values, split_file_lines, hl_dec )
 ##
 
 
-#Read csv and converts data to pandas dataframe
-raw_df = pd.read_csv(path_data) 
+raw_df = pd.read_csv(path_data) #Read csv and converts data to pandas dataframe
 
-#Cleaning empty & wrong format cells
-data_df = raw_df.dropna()
+data_df = raw_df.dropna() #Cleaning empty & wrong format cells, delete lines with NaN or NaT.
 
-#Conversion to numpy array for easier manipulation
-data_np = data_df.to_numpy()
-
-#Seperate dataframe into series for each column(header=sensor data)
+data_np = data_df.to_numpy() #Conversion to numpy array for easier manipulation
 
 
 ##
-## Data UI - Basic matplotlib plotting
+## Data UI
 ##
 
-
-### plot data in for loop in seperate figures
-for i in range(nb_headers):
-    plt.figure(i)
-    data_df.iloc[:, i:i+1].plot()
-    print(i)
-plt.show()
