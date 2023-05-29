@@ -14,8 +14,8 @@
 # latest_daily_version_farmbot_data.txt if keyword = 'daily data'
 
 #------------------------------------------
-from file_google_API.functions_download_data import authorization_authentication, access_API, txt_to_csv
-from file_google_API.functions_download_daily_user import authorization_authentication, access_API, txt_to_csv
+from file_google_API.functions_download_data import authorization_authentication1, access_API1, txt_to_csv1
+from file_google_API.functions_download_daily_user import authorization_authentication2, access_API2, txt_to_csv2
 #--> better way to import the functions.
 
 # Choice of the range of time. This range of time will be applied to the raw data or daily data.
@@ -40,14 +40,14 @@ def rocket_launch(from_date, to_date, keyword):
         exit(404)
 
     if keyword == 'raw data':
-        creds = authorization_authentication()
-        access_API(creds, from_date, to_date)
-        txt_to_csv()
+        creds = authorization_authentication1()
+        access_API1(creds, from_date, to_date)
+        txt_to_csv1()
 
     if keyword == 'daily data':
-        creds = authorization_authentication()
-        access_API(creds, from_date, to_date)
-        txt_to_csv()
+        creds = authorization_authentication2()
+        access_API2(creds, from_date, to_date)
+        txt_to_csv2()
 
 
 

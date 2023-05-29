@@ -37,7 +37,7 @@ desk_path =  os.path.join(desk_dir,"Desktop")
 ##---------------------------------------------------
 # Authorization and authentication
 
-def authorization_authentication():
+def authorization_authentication1():
     
     # Authorization and authentication
 
@@ -68,7 +68,7 @@ def authorization_authentication():
 # Access API.
 # Recover right folder ID and credentials.
 
-def access_API(creds, from_date, to_date):
+def access_API1(creds, from_date, to_date):
     # We try to access the drive API with our authorization
     try:
         service = build("drive", "v3", credentials = creds)
@@ -200,7 +200,7 @@ def write_file_in_OS(service, target_file):
 ##---------------------------------------------------
 # Create a csv file with the right shape based on the txt file.
 
-def txt_to_csv():
+def txt_to_csv1():
 
     path_txt = desk_path + "/latest_version_farmbot_data.txt"
 

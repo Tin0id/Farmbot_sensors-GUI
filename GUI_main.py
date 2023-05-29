@@ -43,7 +43,7 @@ from file_google_API.main_launch_final import rocket_launch # access the functio
 
 # Parameters define by the user:
 
-from_date = 20200513000000 # or None
+from_date = 20230513000000 # or None
 to_date = 20240501001000 # or None
 
 #keyword = 'raw data' # Warning: Depending of the range of time this will take a lot of time.
