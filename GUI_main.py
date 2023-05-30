@@ -1,84 +1,53 @@
-# Farmbot project 2023, Sensors & UI, Mathieu Stawarz
+# Farmbot project 2023, Sensors & GUI, Mathieu Stawarz
 # GUI_main.py
-# main code that will be launched by the user : Frontend code.
+# Main file for launching GUI
 
-# 1. Google API csv file download (from backend code, google drive access)
-# 2. CSV file processing, errors check (re)
-# 3. Data processing (pandas, numpy)
-# 4. GUI 
+# Pyside6 module :
+# pip3 install pyside6
+# Tutorial : https://www.pythonguis.com/pyside6-tutorial/
+#Plotting pyside6 : https://www.pythonguis.com/tutorials/pyside6-plotting-pyqtgraph/
 
-# Necessary preinstalled module on OS for google API access :
-#pip3 install requests
-#pip3 install google-auth
-#pip3 install google-cloud
-#pip3 install google-auth-oauthlib
-#pip3 install google-api-python-client
+#Musics : #free music: https://pixabay.com/sound-effects/search/energy/
 
-
-##
-##
-## Modules imports
-##
-##
-
+#
+#
+# Modules imports
+#
+#
 import sys
-if "sys" not in dir():
-    sys.exit("Error: sys not imported")
-
-import numpy as np
-if 'numpy' not in sys.modules:
-    sys.exit("Error: numpy package not imported")
-
-import pandas as pd
-if 'pandas' not in sys.modules:
-    sys.exit("Error: pandas package not imported")
+from PySide6.QtWidgets import QApplication
 
 ##
 ##
-## File Download google API
+## Class imports
 ##
 ##
 
-from file_google_API.main_launch_final import rocket_launch # access the function
-
-# Parameters define by the user:
-
-from_date = 20230513000000 # or None
-to_date = 20240501001000 # or None
-
-#keyword = 'raw data' # Warning: Depending of the range of time this will take a lot of time.
-keyword = 'daily data' # Faster
-
-rocket_launch(from_date, to_date, keyword)
-
+from GUI_start_window import startWindow
 
 ##
 ##
-## File error check
+## Windows display
 ##
 ##
 
-path_data= "Data/falsedata.csv" #CSV file extraction
-
-from file_check import filecheckf # Imports function
-headers, nb_headers = filecheckf(path_data) # Extract Nb of headers & headers line
-
-
-##
-##
-## Data acquisition & processing (pandas)
-##
-##
+## Main window :
+# Constructor responsible for  initializing the object and setting up the main attributes and components of the mainwindow
+class Window(startWindow):  # <=== the Window class inherits all the attributes and methods from the startWindow class.
+    def __init__(self):
+        super().__init__()
 
 
-raw_df = pd.read_csv(path_data) #Read csv and converts data to pandas dataframe
+if __name__ == "__main__": # allows the code inside the block to run only if the script is executed directly, and not when it is imported as a module.
+    app = QApplication(sys.argv) #You need one (and only one) QApplication instance per application. Pass in sys.argv to allow command line arguments for your app.
+    window = Window()
+    # Start the event loop.
+    app.exec()
+    # Your application won't reach here until you exit and the event loop has stopped.
 
-data_df = raw_df.dropna() #Cleaning empty & wrong format cells, delete lines with NaN or NaT.
-
-data_np = data_df.to_numpy() #Conversion to numpy array for easier manipulation
 
 
-##
-## GUI
-##
+
+
+
 

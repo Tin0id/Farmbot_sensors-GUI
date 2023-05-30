@@ -1,4 +1,4 @@
-# Farmbot project 2023, Sensors & UI, Mathieu Stawarz
+# Farmbot project 2023, Sensors & GUI, Mathieu Stawarz
 # GUI_menu_windows.py
 # pyside6 GUI menu window class.
 # Interaction with the user to let him choose the type & timegap data display

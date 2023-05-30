@@ -1,12 +1,11 @@
-# Farmbot project 2023, Sensors & UI, Mathieu Stawarz
+# Farmbot project 2023, Sensors & GUI, Mathieu Stawarz
 # GUI_start_windows.py
-# GUI starting window class
+# GUI start window class setup
 
 # Pyside6 module :
 # pip3 install pyside6
 # Tutorial : https://www.pythonguis.com/pyside6-tutorial/
 #Plotting pyside6 : https://www.pythonguis.com/tutorials/pyside6-plotting-pyqtgraph/
-
 #Musics : #free music: https://pixabay.com/sound-effects/search/energy/
 
 #
@@ -14,9 +13,8 @@
 # Modules imports
 #
 #
-import sys
 from PySide6.QtCore import Qt, QTimer, QUrl
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel
+from PySide6.QtWidgets import  QMainWindow, QPushButton, QLabel
 from PySide6.QtGui import QPixmap
 from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput #music !!
 from PySide6.QtMultimediaWidgets import QVideoWidget #video widget
@@ -41,7 +39,7 @@ from GUI_menu_window import menuWindow #import menuwindow class
 ## Main window :
 # Constructor responsible for  initializing the object and 
 # setting up the main attributes and components of the mainwindow
-class Window(QMainWindow): 
+class startWindow(QMainWindow): 
     def __init__(self):
         super().__init__() # When you subclass a Qt class you must always call the super __init__ function to allow Qt to set up the object.
 
@@ -52,12 +50,12 @@ class Window(QMainWindow):
         self.width = 1250 #pixels # Size of the window 
         self.height = 650
 
-        self.startWindow() # call start window method
+        self.startWindowsetup() # call start window method
     
     ##starting window setup
     # separate method that sets up the main interface of the window by creating and 
     # configuring widgets like labels and setting the window's title and geometry.
-    def startWindow(self):
+    def startWindowsetup(self):
         #plays Startwindow song 
         self.player = QMediaPlayer()
         self.audio_output = QAudioOutput()
@@ -215,15 +213,3 @@ class Window(QMainWindow):
         self.w = menuWindow() #Creates a new instance w
         self.w.show() #Show the new window 2
         self.close() #closes the main_window
-
-
-if __name__ == "__main__": # allows the code inside the block to run only if the script is executed directly, and not when it is imported as a module.
-    #You need one (and only one) QApplication instance per application. Pass in sys.argv to allow command line arguments for your app.
-    app = QApplication(sys.argv)
-
-    # Set the style sheet for all tooltips
-    window = Window()
-
-    # Start the event loop.
-    app.exec()
-    # Your application won't reach here until you exit and the event loop has stopped.
