@@ -62,13 +62,13 @@ class Piechart(QWidget):
 
 
 class XYDataChart(QWidget):
-    def __init__(self, x_data, y_data):
+    def __init__(self, x_data, y_data, name, colour, thickness):
         super().__init__()
         self.x_data = x_data
         self.y_data = y_data
 
         self.chart = QChart()
-        self.chart.setTitle('XY Data Chart')
+        self.chart.setTitle(name)
 
         self.setAutoFillBackground(True)
         palette = self.palette()
@@ -83,8 +83,8 @@ class XYDataChart(QWidget):
         self.chart.createDefaultAxes()
         self.chart.legend().setVisible(False)
 
-        series_pen = QPen(QColor("#FF00FF"))  # Shiny red color
-        series_pen.setWidth(4)  # Increase line thickness for plotted line
+        series_pen = QPen(QColor(colour))  # Shiny red color
+        series_pen.setWidth(thickness)  # Increase line thickness for plotted line
         self.series.setPen(series_pen)
 
         self.setAutoFillBackground(True)
@@ -114,9 +114,9 @@ class MainWindow(QMainWindow):
         y_data = [1, 4, 9, 16, 25]
 
         chart1 = Piechart()
-        chart2 = XYDataChart(x_data,y_data)
+        chart2 = XYDataChart(x_data,y_data, 'XY Data Chart',"#FF00FF", 4)
         chart3 = Piechart()
-        chart4 = XYDataChart(x_data,y_data)
+        chart4 = XYDataChart(x_data,y_data, 'XY Data Chart' ,"#FF00FF", 3)
 
         widget = QWidget()
         widget.setLayout(layout)
