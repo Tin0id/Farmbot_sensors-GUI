@@ -59,7 +59,7 @@ class MenuWindow(QMainWindow):
         layout.setAlignment(Qt.AlignHCenter)
 
         # Instruction label
-        label = QLabel("Select up to 24-hours back in time for quick data display")
+        label = QLabel("Select up to 72-hours back in time for quick data display")
         font= label.font()
         font.setPointSize(16)  # Set the font size
         font.setItalic(True)
@@ -157,12 +157,11 @@ class MenuWindow(QMainWindow):
         #print("End Date-Time:", self.enddatetime)
         #print(type(self.startdatetime))
         self.save_button.setEnabled(False)  # Disable the button temporarily
-        self.save_button.setText("Saved!")  # Set the button text clicks
-        #Timer
-        QTimer.singleShot(1000, self.data_download)
-
-    def data_download(self):
         self.save_button.setText("Downloading data...")  # Set the button text clicks
+        #Timer
+        QTimer.singleShot(500, self.data_download)
+
+    def data_download(self): 
         fileDownload(self.startdatetime,self.enddatetime)
         QTimer.singleShot(1000, self.data_processing)
 
@@ -173,10 +172,6 @@ class MenuWindow(QMainWindow):
 
     def show_dataWindow(self):
         self.w = dataWindow() #Creates a new instance w
-        self.close() #closes the main_window
-        self.w.show() #Show the new window 2
+        self.close() #closes the menu_window
+        self.w.show() #Show the data window
 
-#if __name__ == "__main__":
-#   app = QApplication(sys.argv)
-#   window = MenuWindow()
-#   sys.exit(app.exec())

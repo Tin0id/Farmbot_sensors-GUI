@@ -1,6 +1,7 @@
 # Farmbot project 2023, Sensors & GUI, Mathieu Stawarz
 # XY_datachart.py
 # XY chart widget class definition
+# Plots a XY chart with 1line 
 
 # Pyside6 module :
 # pip3 install pyside6
@@ -14,10 +15,9 @@
 # Modules imports
 #
 #
-import sys, math
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPainter, QPen, QColor
-from PySide6.QtWidgets import  QWidget, QHBoxLayout, QSizePolicy
+from PySide6.QtWidgets import  QWidget, QHBoxLayout
 from PySide6.QtCharts import QChart, QChartView, QLineSeries
 
 # Only needed for access to command line arguments
@@ -27,7 +27,7 @@ from PySide6.QtCharts import QChart, QChartView, QLineSeries
 # XYDataChart class definition
 
 class XYDatachart(QWidget):
-    def __init__(self, x_data, y_data, chartname, timerange ,timeunits, xunits, yunits, color): #color Qcolor
+    def __init__(self, x_data, y_data, chartname, xunits, yunits, color): #color Qcolor
         super().__init__()
 
         self.x_data = x_data
@@ -45,7 +45,7 @@ class XYDatachart(QWidget):
             self.series.append(x, y)
         self.chart.addSeries(self.series) #adds the series to the chart
         series_pen = QPen(color)  # Blue color with transparency
-        series_pen.setWidth(4)  # Increase line thickness for plotted line
+        series_pen.setWidth(3)  # Increase line thickness for plotted line
         series_pen.setJoinStyle(Qt.RoundJoin)  # Set round join style for smoother line
         self.series.setPen(series_pen)
 
@@ -63,7 +63,7 @@ class XYDatachart(QWidget):
         x_axis_labels = x_axis.labelsFont()
         x_axis_labels.setPointSize(15)  # Set axis labels font size
         x_axis.setLabelsFont(x_axis_labels)
-        x_axis.setTickCount(5) # Set the approximate number of ticks (labels) to be displayed on the X-axis
+        x_axis.setTickCount(6) # Set the approximate number of ticks (labels) to be displayed on the X-axis
         xlabel_format =  "%.1f" + xunits # br HTML line break
         x_axis.setLabelFormat(xlabel_format)  # Format the labels to display one decimal place
         x_axis.setRange(max(x_data), min(x_data))  # Set the range of the X-axis
@@ -74,8 +74,8 @@ class XYDatachart(QWidget):
         y_axis.setLabelsColor(Qt.white) # Set axis labels colour
         y_axis_labels.setPointSize(15)  # Set font size
         y_axis.setLabelsFont(y_axis_labels)
-        y_axis.setTickCount( 3) # Set the approximate number of ticks (labels) to be displayed on the Y-axis
-        ylabel_format = "%.1f" + yunits + '&nbsp;' #&nbsp; HTML non breaking spaces
+        y_axis.setTickCount( 4) # Set the approximate number of ticks (labels) to be displayed on the Y-axis
+        ylabel_format = "%.1f" + '&nbsp;'+ yunits + '&nbsp;' #&nbsp; HTML non breaking spaces
         y_axis.setLabelFormat(ylabel_format)  # Format the labels to display one decimal place
         y_axis.setRange(min(y_data), max(y_data))  # Set the range of the X-axis
 

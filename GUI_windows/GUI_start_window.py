@@ -1,6 +1,6 @@
 # Farmbot project 2023, Sensors & GUI, Mathieu Stawarz
 # GUI_start_windows.py
-# GUI start window class setup
+# file that contains the start window class
 
 # Pyside6 module :
 # pip3 install pyside6

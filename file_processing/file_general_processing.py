@@ -47,9 +47,9 @@ def generalProcessing():
     ##
     ##
 
-    file_path = "/Users/thieums/Desktop/latest_daily_version_farmbot_data.csv"
-    absolute_path = os.path.abspath(file_path)
-
+    file_path = "~/Desktop/latest_daily_version_farmbot_data.csv"
+    expanded_path = os.path.expanduser(file_path)
+    absolute_path = os.path.abspath(expanded_path)
     headers, nb_headers = filecheckf(absolute_path) # Extract Nb of headers & headers line + check csv file
 
 
@@ -63,6 +63,10 @@ def generalProcessing():
     raw_df = pd.read_csv(absolute_path) #Read csv and converts data to pandas dataframe
 
     data_df = raw_df.dropna() #Cleaning empty & wrong format cells, delete lines with NaN or NaT.
+    # Sort the dataframe by the timestamp column
+    data_df = data_df.sort_values(by=headers[1])
+    # Reset the indices after sorting
+    data_df = data_df.reset_index(drop=True)
     #print(data_df.head(5))
     #print(headers)
     data_df.loc[:,'Air humidity'] = data_df.loc[:,[headers[5],headers[12]]].mean(axis=1) # Avg of the two columns values into a new column added at the end
@@ -77,4 +81,5 @@ def generalProcessing():
     data_df1[headers[1]] = pd.to_datetime(data_df1[headers[1]], unit='s') #returns a series not a column, #Converting the timestamp column to a datetime
     #The universal start date for timestamps, also known as the Unix epoch, is January 1, 1970, at 00:00:00 UTC. 
     # print(data_df1.head(5))
+    #self.startdatetime = int(self.start_datetime_edit.dateTime().toString("yyyyMMddhhmmss"))
     data_df1.to_csv('Data/processed_data.csv', index=False) # Creates a new csv file in the Data folder
