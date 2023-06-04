@@ -26,7 +26,7 @@ from PySide6.QtMultimediaWidgets import QVideoWidget #video widget
 ##
 
 
-from GUI_menu_window import menuWindow #import menuwindow class
+from GUI_windows.GUI_menu_window import MenuWindow #import menuwindow class
 
 
 
@@ -69,7 +69,7 @@ class startWindow(QMainWindow):
         self.pushButton.clicked.connect(self.open_menuWindow)  # <=== connect to open_menuWindow submethod
         #Qbutton widget setup
         self.pushButton.setStyleSheet("background-color: rgb(46, 139, 87); color: white; border: 2px solid white;") #Nice green colour
-        self.button_width = 200
+        self.button_width = 300
         self.button_height = 75
         fontp = self.pushButton.font()
         fontp.setPointSize(25)  # Set the font size to 16
@@ -77,7 +77,7 @@ class startWindow(QMainWindow):
         self.pushButton.setFont(fontp)
         self.pushButton.setFixedSize(self.button_width, self.button_height)
         self.pushButton.move( (self.width - self.button_width) / 2 , (self.height - self.button_height) / 2)
-        self.pushButton.setToolTip("<h3 style='background-color: beige; color: black; border: none'> Start the GUI - Data acquisition </h3>") # small pop-up text near the button
+        self.pushButton.setToolTip("<h3 style='background-color: beige; color: black; border: none'> Start the GUI - Menu window </h3>") # small pop-up text near the button
 
         ##Video Widget
         video_widget = QVideoWidget(self) 
@@ -210,6 +210,6 @@ class startWindow(QMainWindow):
     #Show window and close main window
     def show_menuWindow(self):   
         self.playerb.stop()                                          # <===
-        self.w = menuWindow() #Creates a new instance w
-        self.w.show() #Show the new window 2
+        self.w = MenuWindow() #Creates a new instance w
         self.close() #closes the main_window
+        self.w.show() #Show the new window 2

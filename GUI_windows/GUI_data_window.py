@@ -19,7 +19,7 @@
 
 import sys
 from PySide6.QtCore import Qt, QTimer, QUrl
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWidget, QGridLayout, QSizePolicy
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QSizePolicy
 from PySide6.QtGui import QPixmap, QColor
 from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput #music !!
 
@@ -29,8 +29,8 @@ from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput #music !!
 # Class imports
 #
 #
-
-from XY_datachart import XYDatachart
+#from XY_datachart import XYDatachart
+from GUI_windows.XY_datachart import XYDatachart
 
 
 
@@ -93,25 +93,18 @@ class dataWindow(QMainWindow):                           # <===
         self.chart6.setStyleSheet("border: 1px solid white ;")
         layout.addWidget(self.chart6, 2, 1)  # Add chart3 at row 2, column 1
 
-        # Set the size policy of the charts to expand in both directions
-        self.chart.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.chart2.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.chart3.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.chart4.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.chart5.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.chart6.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
         # Set the size policy of the central widget to expand with the main window
         central_widget.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
 
-
-if __name__ == "__main__": # allows the code inside the block to run only if the script is executed directly, and not when it is imported as a module.
-    app = QApplication(sys.argv) #You need one (and only one) QApplication instance per application. Pass in sys.argv to allow command line arguments for your app.
-    window = dataWindow()
-    window.show()
+# Be aware when launching the GUI main : don't allow these line to be runned
+#if __name__ == "__main__": # allows the code inside the block to run only if the script is executed directly, and not when it is imported as a module.
+    #app = QApplication(sys.argv) #You need one (and only one) QApplication instance per application. Pass in sys.argv to allow command line arguments for your app.
+    #window = dataWindow()
+    #window.show()
     # Start the event loop.
-    app.exec()
+    #app.exec()
     # Your application won't reach here until you exit and the event loop has stopped.
 
 

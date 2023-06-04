@@ -23,7 +23,7 @@ from PySide6.QtWidgets import QApplication
 ##
 ##
 
-from GUI_start_window import startWindow
+from GUI_windows.GUI_start_window import startWindow
 
 ##
 ##

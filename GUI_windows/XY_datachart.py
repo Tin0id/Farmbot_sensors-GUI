@@ -18,7 +18,7 @@ import sys, math
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPainter, QPen, QColor
 from PySide6.QtWidgets import  QWidget, QHBoxLayout, QSizePolicy
-from PySide6.QtCharts import QChart, QChartView, QLineSeries, QValueAxis
+from PySide6.QtCharts import QChart, QChartView, QLineSeries
 
 # Only needed for access to command line arguments
 
@@ -31,7 +31,6 @@ class XYDatachart(QWidget):
         super().__init__()
 
         self.x_data = x_data
-        print(type(x_data))
         self.y_data = y_data
 
         #Creates the chart background
@@ -57,9 +56,9 @@ class XYDatachart(QWidget):
 
         # Customize X-axis
         x_axis = axes[0] #select axis x
-        xtitle = 'Last ' + timerange + '-' + timeunits 
-        Xtitle = f'<span style="font-size: 15pt; color: white;">{xtitle}</span>' # Set axis colour & size in HTML CSS style
-        x_axis.setTitleText(Xtitle)  # Set axis title
+        #xtitle = 'Last ' + timerange + '-' + timeunits 
+        #Xtitle = f'<span style="font-size: 15pt; color: white;">{xtitle}</span>' # Set axis colour & size in HTML CSS style
+        #x_axis.setTitleText(Xtitle)  # Set axis title
         x_axis.setLabelsColor(Qt.white) # Set axis labels colour
         x_axis_labels = x_axis.labelsFont()
         x_axis_labels.setPointSize(15)  # Set axis labels font size
@@ -100,5 +99,3 @@ class XYDatachart(QWidget):
 
         self.setFixedSize(690, 240) #Set fixed size
 
-        # Set the size policy to expand in both directions
-        self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
